@@ -231,7 +231,7 @@
 		(uuid "c89f8ee5-d4ed-40c3-a1db-83506234bbb6")
 	)
 	(embedded_fonts no)
-	(model "${KICAD9_3DMODEL_DIR}/Button_Switch_SMD.3dshapes/SW_Push_SPST_NO_Alps_SKRK.wrl"
+	(model "${KIPRJMOD}/custom.pretty/TS-1088-AR02016.stp"
 		(offset
 			(xyz 0 0 0)
 		)
@@ -239,7 +239,7 @@
 			(xyz 1 1 1)
 		)
 		(rotate
-			(xyz 0 0 0)
+			(xyz -90 -0 -0)
 		)
 	)
 )

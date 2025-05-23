@@ -1,0 +1,235 @@
+(footprint "SOT-523"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(descr "SOT523, https://www.diodes.com/assets/Package-Files/SOT523.pdf")
+	(tags "SOT-523")
+	(property "Reference" "Q1"
+		(at 1.25 -0.75 90)
+		(layer "F.Fab")
+		(uuid "c86009e2-815a-4c47-ab17-cb0446d510e9")
+		(effects
+			(font
+				(size 0.75 0.75)
+				(thickness 0.1)
+			)
+		)
+	)
+	(property "Value" "MMBT2222A"
+		(at 0 1.75 0)
+		(layer "F.Fab")
+		(uuid "f8f43372-f274-4b15-a66b-0b0a2c778037")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/MMBT2222A.pdf"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "05b01014-253f-405f-9d94-4eb139fa55c5")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" "600mA Ic, 40V Vce, NPN Transistor, SOT-23"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "f50a1c8f-d513-4647-8857-dcdbf66cc20c")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "JLC P/N" "C8512"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "6775de66-b24c-4de7-8923-f3d77dc22817")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(fp_line
+		(start 0.65 -0.9)
+		(end -0.65 -0.9)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "3eaaa558-c466-40a8-9180-380f8845c1fa")
+	)
+	(fp_line
+		(start 0.65 0.9)
+		(end -0.65 0.9)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "e7813c1d-f3a9-405d-84bd-80c48663d723")
+	)
+	(fp_circle
+		(center -1.25 -0.51)
+		(end -1.1 -0.51)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill yes)
+		(layer "F.SilkS")
+		(uuid "af6bf704-8fb3-40f1-9d3e-fb433419e668")
+	)
+	(fp_line
+		(start -1.15 -1.05)
+		(end -1.15 1.05)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "95f122a1-65c0-49c0-921f-eb7f740bace6")
+	)
+	(fp_line
+		(start -1.15 -1.05)
+		(end 1.15 -1.05)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "e2272daa-5a37-4c6a-a5aa-ea3d257a2e9a")
+	)
+	(fp_line
+		(start 1.15 1.05)
+		(end -1.15 1.05)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "c4692025-61d8-4b54-a9ac-b446e2f09514")
+	)
+	(fp_line
+		(start 1.15 1.05)
+		(end 1.15 -1.05)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "1b29e11c-c5e5-4ff9-b321-2f789ae17eb3")
+	)
+	(fp_line
+		(start -0.4 -0.45)
+		(end -0.4 0.8)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "86bd5658-7e7c-47ea-a59d-f6414b59ed89")
+	)
+	(fp_line
+		(start -0.4 -0.45)
+		(end -0.05 -0.8)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "12dbb22e-3873-4d83-b8fa-a91940aa1554")
+	)
+	(fp_line
+		(start -0.4 0.8)
+		(end 0.4 0.8)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "1849c76a-2561-4ac0-8d45-db959536113e")
+	)
+	(fp_line
+		(start 0.4 -0.8)
+		(end -0.05 -0.8)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "5527053e-ab30-4fe4-a94c-6b429e2cfdf5")
+	)
+	(fp_line
+		(start 0.4 0.8)
+		(end 0.4 -0.8)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "e1b869d2-bf46-4be0-9822-916d7f0e0429")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 0 90)
+		(layer "F.Fab")
+		(uuid "78a102e4-7bea-430c-bec0-c3531c118131")
+		(effects
+			(font
+				(size 0.4 0.4)
+				(thickness 0.0625)
+			)
+		)
+	)
+	(pad "1" smd roundrect
+		(at -0.645 -0.5 180)
+		(size 0.51 0.4)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.25)
+		(uuid "f3524a13-02fb-47ba-95b8-e7fcf16ef677")
+	)
+	(pad "2" smd roundrect
+		(at -0.645 0.5 180)
+		(size 0.51 0.4)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.25)
+		(uuid "f7ed8403-c67f-41a5-a3e7-5af21a1e5fed")
+	)
+	(pad "3" smd roundrect
+		(at 0.645 0 180)
+		(size 0.51 0.4)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.25)
+		(uuid "c52c665d-7639-4251-9c75-9486962e4141")
+	)
+	(embedded_fonts no)
+	(model "${KIPRJMOD}/custom.pretty/SOT-523.stp"
+		(offset
+			(xyz 0 -0.81 0.53)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -0 -0 90)
+		)
+	)
+)
