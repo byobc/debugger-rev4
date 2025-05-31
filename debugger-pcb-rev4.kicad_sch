@@ -5083,6 +5083,7 @@
 							)
 						)
 					)
+					(alternate "" input line)
 					(alternate "ADC1_IN2" bidirectional line)
 					(alternate "ADC2_IN2" bidirectional line)
 					(alternate "" input line)
@@ -5106,6 +5107,7 @@
 							)
 						)
 					)
+					(alternate "" input line)
 					(alternate "ADC1_IN3" bidirectional line)
 					(alternate "ADC2_IN3" bidirectional line)
 					(alternate "" input line)
@@ -8846,7 +8848,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Resistor, US symbol"
+		(property "Description" "Resistor"
 			(at 140.97 158.75 0)
 			(effects
 				(font
@@ -9070,7 +9072,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "32-bit ARM microcontroller"
 			(at 72.39 99.06 0)
 			(effects
 				(font
@@ -9372,7 +9374,7 @@
 		(mirror x)
 		(unit 1)
 		(exclude_from_sim yes)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "34c90780-95ca-4759-ad6b-b4a573084429")
@@ -9929,7 +9931,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Resistor, US symbol"
+		(property "Description" "Resistor"
 			(at 248.92 45.72 0)
 			(effects
 				(font
@@ -10177,7 +10179,7 @@
 		(at 231.14 125.73 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "531f7bc5-3219-47a3-9ed2-b040e34cb6ac")
@@ -10551,7 +10553,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Resistor, US symbol"
+		(property "Description" "Resistor"
 			(at 140.97 161.29 0)
 			(effects
 				(font
@@ -10710,7 +10712,7 @@
 				(hide yes)
 			)
 		)
-		(property "JLC P/N" "C22468359"
+		(property "JLC P/N" "C94417"
 			(at 232.41 45.72 0)
 			(effects
 				(font
@@ -11095,7 +11097,7 @@
 		(at 245.11 31.75 90)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "77795b5e-2f85-48b3-b3dd-dd02486133c2")
@@ -11161,7 +11163,7 @@
 		(at 119.38 45.72 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp yes)
 		(fields_autoplaced yes)
@@ -11683,7 +11685,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Resistor, US symbol"
+		(property "Description" "Resistor"
 			(at 229.87 36.83 0)
 			(effects
 				(font
@@ -12052,7 +12054,7 @@
 		(at 138.43 68.58 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -12971,7 +12973,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Resistor, US symbol"
+		(property "Description" "Resistor"
 			(at 260.35 54.61 0)
 			(effects
 				(font
@@ -13172,7 +13174,7 @@
 		(at 130.81 85.09 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp yes)
 		(fields_autoplaced yes)
@@ -13525,7 +13527,7 @@
 				(hide yes)
 			)
 		)
-		(property "JLC P/N" "C42415188"
+		(property "JLC P/N" "C2836079"
 			(at 257.81 45.72 0)
 			(effects
 				(font
@@ -13557,7 +13559,7 @@
 		(at 130.81 78.74 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp yes)
 		(fields_autoplaced yes)
@@ -13694,7 +13696,7 @@
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "e7809690-023c-4c53-b5f6-0c402f04555d")
@@ -14269,7 +14271,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Resistor, US symbol"
+		(property "Description" "Resistor"
 			(at 241.3 45.72 0)
 			(effects
 				(font
