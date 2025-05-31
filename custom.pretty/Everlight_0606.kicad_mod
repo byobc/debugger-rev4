@@ -76,7 +76,7 @@
 	)
 	(fp_poly
 		(pts
-			(xy -1.5 0.2) (xy -1.25 0.45) (xy -1.5 0.7)
+			(xy 1.65 -0.05) (xy 1.4 0.2) (xy 1.15 -0.05)
 		)
 		(stroke
 			(width 0.1)
@@ -96,6 +96,19 @@
 		(fill no)
 		(layer "F.CrtYd")
 		(uuid "f6d80b0c-af59-4934-a64e-b3342b7a7b18")
+	)
+	(fp_text user "1"
+		(at -1 0.5 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "ae8472da-4927-445a-ab05-f7ae00abf429")
+		(effects
+			(font
+				(size 0.75 0.75)
+				(thickness 0.1)
+			)
+			(justify right)
+		)
 	)
 	(fp_text user "${REFERENCE}"
 		(at 0 2.5 0)

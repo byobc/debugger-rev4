@@ -6,7 +6,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(property "Reference" "U1"
+		(property "Reference" "U"
 			(at 4.6833 -48.26 0)
 			(effects
 				(font
@@ -518,7 +518,7 @@
 					)
 				)
 			)
-			(pin power_in line
+			(pin passive line
 				(at 0 48.26 270)
 				(length 2.54)
 				(hide yes)
@@ -537,7 +537,7 @@
 					)
 				)
 			)
-			(pin power_in line
+			(pin passive line
 				(at 0 48.26 270)
 				(length 2.54)
 				(hide yes)
@@ -556,7 +556,7 @@
 					)
 				)
 			)
-			(pin power_in line
+			(pin passive line
 				(at 0 48.26 270)
 				(length 2.54)
 				(hide yes)
