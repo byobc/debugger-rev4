@@ -49,4 +49,7 @@ namespace gpio {
 	IO_DECL(be)
 	IO_DECL(we)
 	IO_DECL(rdy)
+
+	void setup_rgb();
+	void write_rgb(uint8_t r, uint8_t g, uint8_t b);
 }

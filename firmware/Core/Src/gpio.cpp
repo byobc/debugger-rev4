@@ -2,10 +2,13 @@
 #include "stm32f103xb.h"
 #include "stm32f1xx_hal.h" // IWYU pragma: keep
 #include "stm32f1xx_hal_gpio.h"
+#include "stm32f1xx_hal_tim.h"
 // #include "pins.h"
 
 #define DATA_PINS_MASK 0b1111111100 // PB2:9
 #define ADDR_PINS_MASK 0xffff // PC0:15
+
+extern TIM_HandleTypeDef htim1;
 
 #define IO_DEF(_state, _port, _pin) \
 	void set_ ## _state ## _dir(Direction dir, bool pullup) { \
@@ -117,4 +120,22 @@ namespace gpio {
 	IO_DEF(be,    GPIOA, GPIO_PIN_15)
 	IO_DEF(we,    GPIOA, GPIO_PIN_0)
 	IO_DEF(rdy,   GPIOA, GPIO_PIN_4)
+
+	void setup_rgb() {
+		GPIO_InitTypeDef init {
+			.Pin = 0xe000,
+			.Mode = GPIO_MODE_OUTPUT_PP,
+			.Pull = GPIO_NOPULL,
+			.Speed = GPIO_SPEED_FREQ_LOW,
+		};
+		HAL_GPIO_Init(GPIOB, &init);
+		HAL_GPIO_WritePin(GPIOB, 0xe000, GPIO_PIN_RESET);
+
+		// HAL_TIM_Base_Init(&htim1);
+		// TIM1->
+	}
+
+	void write_rgb(uint8_t r, uint8_t g, uint8_t b) {
+		
+	}
 }

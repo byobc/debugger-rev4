@@ -116,6 +116,7 @@ void setup_pin_directions() {
   AFIO->MAPR |= (1 << 15); // set PD01_RM
   // printf("%04lx %08lx\n", RCC->APB2ENR, AFIO->MAPR);
   delay_loop(1000);
+  gpio::setup_rgb();
   gpio::set_resb_dir(Output, false);
   // printf("%08lx\n", GPIOD->IDR);
   // printf("%i\n", gpio::read_resb());
