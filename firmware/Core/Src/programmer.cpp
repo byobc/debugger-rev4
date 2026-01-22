@@ -1,8 +1,10 @@
 #include "programmer.h"
 #include "gpio.h"
 // #include "pins.h"
+#include <tusb.h>
 
 static void delay_loop(int amount) {
+    tud_task();
   volatile int i = 0;
   for (i = 0; i < amount; ++i);
 }

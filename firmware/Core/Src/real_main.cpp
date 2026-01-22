@@ -6,6 +6,7 @@
 #include "programmer.h"
 
 #include <stdio.h>
+#include <tusb.h>
 
 #include "physicalw65c02.h"
 
@@ -187,6 +188,7 @@ static Wait WAIT = Wait::HalfCycle;
 Action handle_commands(PhysicalW65C02 &cpu, bool phi2) {
   Command cmd;
   while (true) {
+    tud_task();
     int result = get_command(cmd);
     if (result == ERR_NO_CMD) {
       return Action::None;
@@ -203,6 +205,7 @@ Action handle_commands(PhysicalW65C02 &cpu, bool phi2) {
       gpio::set_data_bus_dir(gpio::Direction::Output);
 
       for (int i = 0; i < 64; ++i) {
+        tud_task();
         programmer::byte_program(cmd.write_eeprom.addr + i, cmd.write_eeprom.data[i]);
       }
 
@@ -222,6 +225,7 @@ Action handle_commands(PhysicalW65C02 &cpu, bool phi2) {
       delay_loop(5);
 
       for (uint16_t i = 0; i < cmd.read_memory.len; ++i) {
+        tud_task();
         uint16_t addr = i + cmd.read_memory.addr;
 
         gpio::write_addr_bus(addr);
@@ -596,6 +600,7 @@ void run() {
   PhysicalW65C02 cpu = {};
 
   while (1) {
+    tud_task();
     uint8_t data;
 
     // Interrupt signals (IRQB, NMIB, RESB, RDY) are latched on the falling edge.
@@ -672,6 +677,7 @@ void run() {
     //delay_loop(20);
 
     do {
+      tud_task();
       action = handle_commands(cpu, true);
       if (action == Action::Continue) {
         WAIT = Wait::None;

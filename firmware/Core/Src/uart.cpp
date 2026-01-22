@@ -1,9 +1,12 @@
 #include "uart.h"
 
+#include "class/cdc/cdc_device.h"
 #include "stm32f1xx_hal_uart.h"
+#include <tusb.h>
 
 namespace uart {
     void init() {
+        tud_task();
         // Configure the TXD pin as output
         // PORTF.DIRSET = 1 << 4;
         // PORTF.DIRCLR = 1 << 5;
@@ -33,7 +36,10 @@ namespace uart {
     }
 
     void put(uint8_t data) {
-        HAL_UART_Transmit(&huart1, &data, 1, HAL_MAX_DELAY);
+        tud_task();
+        // HAL_UART_Transmit(&huart1, &data, 1, HAL_MAX_DELAY);
+        tud_cdc_write(&data, 1);
+        tud_cdc_write_flush();
         // Wait for tx data register empty
         // while ((USART2.STATUS & (1 << 5)) == 0);
 
@@ -41,22 +47,35 @@ namespace uart {
     }
 
     void put_bytes(const uint8_t data[], size_t len) {
-        HAL_UART_Transmit(&huart1, data, len, HAL_MAX_DELAY);
+        tud_task();
+        // HAL_UART_Transmit(&huart1, data, len, HAL_MAX_DELAY);
+        tud_cdc_write(data, len);
+        tud_cdc_write_flush();
     }
 
     uint8_t get() {
         uint8_t buf;
-        while (HAL_UART_Receive(&huart1, &buf, 1, HAL_MAX_DELAY) != HAL_OK);
+        // while (HAL_UART_Receive(&huart1, &buf, 1, HAL_MAX_DELAY) != HAL_OK);
+        tud_task();
+        while (tud_cdc_read(&buf, 1) == 0) {
+            tud_task();
+        }
         return buf;
     }
 
     void get_bytes(uint8_t data[], size_t len) {
-        while (HAL_UART_Receive(&huart1, data, len, HAL_MAX_DELAY) != HAL_OK);
+        // while (HAL_UART_Receive(&huart1, data, len, HAL_MAX_DELAY) != HAL_OK);
+        tud_task();
+        while (tud_cdc_read(data, len) == 0) {
+            tud_task();
+        }
     }
 
     int get_nonblocking() {
+        tud_task();
         uint8_t buf;
-        if (HAL_UART_Receive(&huart1, &buf, 1, 0) == HAL_OK) {
+        // if (HAL_UART_Receive(&huart1, &buf, 1, 0) == HAL_OK) {
+        if (tud_cdc_read(&buf, 1) == 0) {
             return buf;
         } else {
             return -1;

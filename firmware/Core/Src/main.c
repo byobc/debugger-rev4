@@ -22,6 +22,8 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
+#include <tusb.h>
+#include "tusb_config.h"
 
 /* USER CODE END Includes */
 
@@ -32,6 +34,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+#define EXTEN_CTR (*((uint32_t*)0x40023800))
 
 /* USER CODE END PD */
 
@@ -47,8 +50,6 @@ UART_HandleTypeDef huart1;
 
 PCD_HandleTypeDef hpcd_USB_FS;
 
-void real_main();
-
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -61,21 +62,94 @@ static void MX_USART1_UART_Init(void);
 static void MX_USB_PCD_Init(void);
 /* USER CODE BEGIN PFP */
 
+void real_main(void);
+
+void USB_HP_CAN1_TX_IRQHandler(void)
+{
+      tud_int_handler(BOARD_TUD_RHPORT);
+}
+
+void USB_LP_CAN1_RX0_IRQHandler(void)
+{
+      tud_int_handler(BOARD_TUD_RHPORT);
+}
+/*
+//--------------------------------------------------------------------+
+// USB CDC
+//--------------------------------------------------------------------+
+void cdc_task(void) {
+  // connected() check for DTR bit
+  // Most but not all terminal client set this when making connection
+  // if ( tud_cdc_connected() )
+  {
+    // connected and there are data available
+    if (tud_cdc_available()) {
+      // read data
+      char     buf[64];
+      uint32_t count = tud_cdc_read(buf, sizeof(buf));
+      (void)count;
+
+      // Echo back
+      // Note: Skip echo by commenting out write() and write_flush()
+      // for throughput test e.g
+      //    $ dd if=/dev/zero of=/dev/ttyACM0 count=10000
+      tud_cdc_write(buf, count);
+      tud_cdc_write_flush();
+    }
+
+    // Press on-board button to send Uart status notification
+    static cdc_notify_uart_state_t uart_state = {.value = 0};
+
+    static uint32_t btn_prev = 0;
+    const uint32_t  btn      = 0;
+
+    if ((btn_prev == 0u) && (btn != 0u)) {
+      uart_state.dsr ^= 1;
+      uart_state.dcd ^= 1;
+      tud_cdc_notify_uart_state(&uart_state);
+    }
+    btn_prev = btn;
+  }
+}*/
+
+// Invoked when cdc when line state changed e.g connected/disconnected
+void tud_cdc_line_state_cb(uint8_t itf, bool dtr, bool rts) {
+  (void)itf;
+  (void)rts;
+
+  if (dtr) {
+    // Terminal connected
+    // blink_enable = false;
+    // board_led_write(true);
+  } else {
+    // Terminal disconnected
+    // blink_enable = true;
+  }
+}
+
+// Invoked when CDC interface received data from host
+void tud_cdc_rx_cb(uint8_t itf) {
+  (void)itf;
+}
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 int _write(int fd, const char *ptr, int len) {
-  HAL_StatusTypeDef hstatus;
-  if (fd == 1 || fd == 2) {
-    hstatus = HAL_UART_Transmit(&huart1, (const uint8_t *)ptr, len, HAL_MAX_DELAY);
-    if (hstatus == HAL_OK) {
-      return len;
-    } else {
-      return -1;
-    }
-  }
-  return -1;
+  // HAL_StatusTypeDef hstatus;
+  // if (fd == 1 || fd == 2) {
+  //   hstatus = HAL_UART_Transmit(&huart1, (const uint8_t *)ptr, len, HAL_MAX_DELAY);
+  //   if (hstatus == HAL_OK) {
+  //     return len;
+  //   } else {
+  //     return -1;
+  //   }
+  // }
+  // return -1;
+  if (!tud_cdc_write(ptr, len)) return -1;
+  tud_cdc_write_flush();
+  return len;
 }
 /* USER CODE END 0 */
 
@@ -96,6 +170,7 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
+  __HAL_AFIO_REMAP_SWJ_ENABLE(); // turn on debugging lmao idk why i have to manually do it
 
   /* USER CODE END Init */
 
@@ -103,6 +178,8 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
+  EXTEN_CTR |= (1 << 1)  // USBDPU
+            |  (1 << 3); // USB5VSEL
 
   /* USER CODE END SysInit */
 
@@ -113,17 +190,24 @@ int main(void)
   MX_USB_PCD_Init();
   /* USER CODE BEGIN 2 */
 
+  // init device stack on configured roothub port
+  tusb_rhport_init_t dev_init = {.role = TUSB_ROLE_DEVICE, .speed = TUSB_SPEED_AUTO};
+  tusb_init(BOARD_TUD_RHPORT, &dev_init);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   // while (1)
   // {
+  //   tud_task(); // tinyusb device task
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    printf("hello world\n");
-    // HAL_Delay(1);
+    // printf("hello world\n");
+    // CDC_Transmit_FS("hello world\n", 12);
+    // cdc_task();
+    // HAL_Delay(1000);
   // }
   real_main();
   /* USER CODE END 3 */
@@ -142,12 +226,13 @@ void SystemClock_Config(void)
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+  RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+  RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV2;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
-  RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
-  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI_DIV2;
-  RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL12;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+  RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL9;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     Error_Handler();
@@ -162,12 +247,12 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK)
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
   {
     Error_Handler();
   }
   PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USB;
-  PeriphClkInit.UsbClockSelection = RCC_USBCLKSOURCE_PLL;
+  PeriphClkInit.UsbClockSelection = RCC_USBCLKSOURCE_PLL_DIV1_5;
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
   {
     Error_Handler();
@@ -333,6 +418,7 @@ static void MX_GPIO_Init(void)
   /* USER CODE END MX_GPIO_Init_1 */
 
   /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
 

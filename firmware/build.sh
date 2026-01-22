@@ -23,7 +23,7 @@ openocd_args=(
 )
 
 function flash {
-  openocd "${openocd_args[@]}" -c 'init; reset halt; program {firmware.elf} verify exit'
+  openocd "${openocd_args[@]}" -c 'init; reset halt; program {firmware.elf} verify reset exit'
 }
 
 function debug {
