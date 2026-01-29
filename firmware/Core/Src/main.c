@@ -73,7 +73,7 @@ void USB_LP_CAN1_RX0_IRQHandler(void)
 {
       tud_int_handler(BOARD_TUD_RHPORT);
 }
-/*
+
 //--------------------------------------------------------------------+
 // USB CDC
 //--------------------------------------------------------------------+
@@ -110,7 +110,7 @@ void cdc_task(void) {
     }
     btn_prev = btn;
   }
-}*/
+}
 
 // Invoked when cdc when line state changed e.g connected/disconnected
 void tud_cdc_line_state_cb(uint8_t itf, bool dtr, bool rts) {
@@ -198,18 +198,18 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  // while (1)
-  // {
-  //   tud_task(); // tinyusb device task
+  while (1)
+  {
+    tud_task(); // tinyusb device task
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
     // printf("hello world\n");
     // CDC_Transmit_FS("hello world\n", 12);
-    // cdc_task();
-    // HAL_Delay(1000);
-  // }
-  real_main();
+    cdc_task();
+    HAL_Delay(1000);
+  }
+  // real_main();
   /* USER CODE END 3 */
 }
 

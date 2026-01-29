@@ -377,6 +377,10 @@ void PhysicalW65C02::tick_cycle_fetch(BusInState state) {
 #undef W65C02S_OPCODE
 }
 
+bool PhysicalW65C02::get_sync() const {
+    return mode == Mode::FETCH;
+}
+
 void PhysicalW65C02::get_bus_state(BusState& out) const {
 	out.sync = false;
 	out.vpb  = true;

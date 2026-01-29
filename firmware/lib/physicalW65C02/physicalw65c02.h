@@ -187,6 +187,7 @@ public:
     // Advances the processor by one halfcycle.
     void tick_cycle(BusInState state);
 
+    bool get_sync() const;
     void get_bus_state(BusState& out) const;
 
 private:
