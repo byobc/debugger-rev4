@@ -3,6 +3,7 @@
 // #include "pins.h"
 
 static void delay_loop(int amount) {
+    amount *= 3;
   volatile int i = 0;
   for (i = 0; i < amount; ++i);
 }
